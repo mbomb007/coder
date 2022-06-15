@@ -1,6 +1,6 @@
 <?php
 /**
- * Verifies that class/interface/trait methods have scope modifiers.
+ * Verifies that class/interface/trait/enum methods have scope modifiers.
  *
  * @category PHP
  * @package  PHP_CodeSniffer
@@ -14,11 +14,11 @@ use PHP_CodeSniffer\Sniffs\AbstractScopeSniff;
 use PHP_CodeSniffer\Util\Tokens;
 
 /**
- * Verifies that class/interface/trait methods have scope modifiers.
+ * Verifies that class/interface/trait/enum methods have scope modifiers.
  *
  * Laregely copied from
  * \PHP_CodeSniffer\Standards\Squiz\Sniffs\Scope\MethodScopeSniff to work on
- * traits and have a fixer.
+ * traits and enums and have a fixer.
  *
  * @category PHP
  * @package  PHP_CodeSniffer
@@ -34,7 +34,7 @@ class MethodScopeSniff extends AbstractScopeSniff
      */
     public function __construct()
     {
-        parent::__construct([T_CLASS, T_INTERFACE, T_TRAIT], [T_FUNCTION]);
+        parent::__construct([T_CLASS, T_INTERFACE, T_TRAIT, T_ENUM], [T_FUNCTION]);
 
     }//end __construct()
 

@@ -57,7 +57,7 @@ class InlineCommentSniff implements Sniff
     {
         $tokens = $phpcsFile->getTokens();
 
-        // If this is a function/class/interface doc block comment, skip it.
+        // If this is a function/class/interface/trait/enum doc block comment, skip it.
         // We are only interested in inline doc block comments, which are
         // not allowed.
         if ($tokens[$stackPtr]['code'] === T_DOC_COMMENT_OPEN_TAG) {
@@ -73,6 +73,7 @@ class InlineCommentSniff implements Sniff
                 T_CLASS,
                 T_INTERFACE,
                 T_TRAIT,
+                T_ENUM,
                 T_FUNCTION,
                 T_CLOSURE,
                 T_PUBLIC,

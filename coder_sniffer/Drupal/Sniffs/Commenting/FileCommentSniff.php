@@ -56,26 +56,26 @@ class FileCommentSniff implements Sniff
         $tokens       = $phpcsFile->getTokens();
         $commentStart = $phpcsFile->findNext(T_WHITESPACE, ($stackPtr + 1), null, true);
 
-        // Files containing exactly one class, interface or trait are allowed to
-        // ommit a file doc block. If a namespace is used then the file comment must
+        // Files containing exactly one class, interface, trait or enum are allowed to
+        // omit a file doc block. If a namespace is used then the file comment must
         // be omitted.
-        $oopKeyword = $phpcsFile->findNext([T_CLASS, T_INTERFACE, T_TRAIT], $stackPtr);
+        $oopKeyword = $phpcsFile->findNext([T_CLASS, T_INTERFACE, T_TRAIT, T_ENUM], $stackPtr);
         if ($oopKeyword !== false) {
             $namespace = $phpcsFile->findNext(T_NAMESPACE, $stackPtr);
-            // Check if the file contains multiple classes/interfaces/traits - then a
+            // Check if the file contains multiple classes/interfaces/traits/enums - then a
             // file doc block is allowed.
-            $secondOopKeyword = $phpcsFile->findNext([T_CLASS, T_INTERFACE, T_TRAIT], ($oopKeyword + 1));
-            // Namespaced classes, interfaces and traits should not have an @file doc
-            // block.
+            $secondOopKeyword = $phpcsFile->findNext([T_CLASS, T_INTERFACE, T_TRAIT, T_ENUM], ($oopKeyword + 1));
+            // Namespaced classes, interfaces, traits and enums should not have a
+            // @file doc block.
             if (($tokens[$commentStart]['code'] === T_DOC_COMMENT_OPEN_TAG
                 || $tokens[$commentStart]['code'] === T_COMMENT)
                 && $secondOopKeyword === false
                 && $namespace !== false
             ) {
                 if ($tokens[$commentStart]['code'] === T_COMMENT) {
-                    $phpcsFile->addError('Namespaced classes, interfaces and traits should not begin with a file doc comment', $commentStart, 'NamespaceNoFileDoc');
+                    $phpcsFile->addError('Namespaced classes, interfaces, traits and enums should not begin with a file doc comment', $commentStart, 'NamespaceNoFileDoc');
                 } else {
-                    $fix = $phpcsFile->addFixableError('Namespaced classes, interfaces and traits should not begin with a file doc comment', $commentStart, 'NamespaceNoFileDoc');
+                    $fix = $phpcsFile->addFixableError('Namespaced classes, interfaces, traits and enums should not begin with a file doc comment', $commentStart, 'NamespaceNoFileDoc');
                     if ($fix === true) {
                         $phpcsFile->fixer->beginChangeset();
 

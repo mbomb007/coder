@@ -13,6 +13,13 @@ use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Util\Tokens;
 use DrupalPractice\Project;
 
+/**
+ * Checks that file names match the class, interface, trait, or enum name.
+ *
+ * @category PHP
+ * @package  PHP_CodeSniffer
+ * @link     http://pear.php.net/package/PHP_CodeSniffer
+ */
 class ClassFileNameSniff implements Sniff
 {
 
@@ -28,6 +35,7 @@ class ClassFileNameSniff implements Sniff
             T_CLASS,
             T_INTERFACE,
             T_TRAIT,
+            T_ENUM,
         ];
 
     }//end register()

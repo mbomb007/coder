@@ -55,7 +55,7 @@ class UseGlobalClassSniff implements Sniff
         $tokens = $phpcsFile->getTokens();
 
         // Find the first declaration, marking the end of the use statements.
-        $bodyStart = $phpcsFile->findNext([T_CLASS, T_INTERFACE, T_TRAIT, T_FUNCTION], 0);
+        $bodyStart = $phpcsFile->findNext([T_CLASS, T_INTERFACE, T_TRAIT, T_ENUM, T_FUNCTION], 0);
 
         // Ensure we are in the global scope, to exclude trait use statements.
         if (empty($tokens[$stackPtr]['conditions']) === false) {
@@ -85,7 +85,7 @@ class UseGlobalClassSniff implements Sniff
             $alias     = $phpcsFile->findPrevious(T_STRING, $lineEnd, $stackPtr);
             $aliasName = $tokens[$alias]['content'];
 
-            $error = 'Non-namespaced classes/interfaces/traits should not be referenced with use statements';
+            $error = 'Non-namespaced classes/interfaces/traits/enums should not be referenced with use statements';
             $fix   = $phpcsFile->addFixableError($error, $class, 'RedundantUseStatement');
 
             if ($fix === true) {

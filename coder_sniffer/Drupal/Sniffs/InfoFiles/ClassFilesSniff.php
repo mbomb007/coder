@@ -13,8 +13,8 @@ use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Sniffs\Sniff;
 
 /**
- * Checks files[] entries in info files. Only files containing classes/interfaces
- * should be listed.
+ * Checks files[] entries in info files. Only files containing
+ * classes/interfaces/traits/enums should be listed.
  *
  * @category PHP
  * @package  PHP_CodeSniffer
@@ -68,18 +68,18 @@ class ClassFilesSniff implements Sniff
                 }
 
                 // Read the file, parse its tokens and check if it actually contains
-                // a class or interface definition.
+                // a class, interface, trait or enum definition.
                 $searchTokens = token_get_all(file_get_contents($fileName));
                 foreach ($searchTokens as $token) {
                     if (is_array($token) === true
-                        && in_array($token[0], [T_CLASS, T_INTERFACE, T_TRAIT]) === true
+                        && in_array($token[0], [T_CLASS, T_INTERFACE, T_TRAIT, T_ENUM]) === true
                     ) {
                         continue 2;
                     }
                 }
 
                 $ptr   = self::getPtr('files[]', $file, $phpcsFile);
-                $error = "It's only necessary to declare files[] if they declare a class or interface.";
+                $error = "It's only necessary to declare files[] if they declare a class, interface, trait or enum.";
                 $phpcsFile->addError($error, $ptr, 'UnecessaryFileDeclaration');
             }//end foreach
         }//end if

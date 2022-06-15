@@ -144,7 +144,7 @@ class FullyQualifiedNamespaceSniff implements Sniff
             }
         }
 
-        $error = 'Namespaced classes/interfaces/traits should be referenced with use statements';
+        $error = 'Namespaced classes/interfaces/traits/enums should be referenced with use statements';
         if ($conflict === true) {
             $fix = false;
             $phpcsFile->addError($error, $stackPtr, 'UseStatementMissing');

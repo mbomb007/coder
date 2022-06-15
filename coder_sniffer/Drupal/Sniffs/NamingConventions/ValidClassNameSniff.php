@@ -19,7 +19,7 @@ use PHP_CodeSniffer\Sniffs\Sniff;
 /**
  * \Drupal\Sniffs\NamingConventions\ValidClassNameSniff.
  *
- * Ensures class and interface names start with a capital letter
+ * Ensures class/interface/trait/enum names start with a capital letter
  * and do not use _ separators.
  *
  * @category  PHP
@@ -45,6 +45,8 @@ class ValidClassNameSniff implements Sniff
         return [
             T_CLASS,
             T_INTERFACE,
+            T_TRAIT,
+            T_ENUM,
         ];
 
     }//end register()

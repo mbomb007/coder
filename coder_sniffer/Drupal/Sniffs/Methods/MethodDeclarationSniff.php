@@ -17,7 +17,7 @@ use PHP_CodeSniffer\Standards\PSR2\Sniffs\Methods\MethodDeclarationSniff as PSR2
  *
  * Extending
  * \PHP_CodeSniffer\Standards\PSR2\Sniffs\Methods\MethodDeclarationSniff
- * to also support traits.
+ * to also support traits and enums.
  *
  * @category PHP
  * @package  PHP_CodeSniffer
@@ -32,7 +32,7 @@ class MethodDeclarationSniff extends PSR2MethodDeclarationSniff
      */
     public function __construct()
     {
-        AbstractScopeSniff::__construct([T_CLASS, T_INTERFACE, T_TRAIT], [T_FUNCTION]);
+        AbstractScopeSniff::__construct([T_CLASS, T_INTERFACE, T_TRAIT, T_ENUM], [T_FUNCTION]);
 
     }//end __construct()
 

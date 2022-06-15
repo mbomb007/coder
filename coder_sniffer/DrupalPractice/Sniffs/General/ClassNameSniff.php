@@ -35,6 +35,8 @@ class ClassNameSniff implements Sniff
         return [
             T_CLASS,
             T_INTERFACE,
+            T_TRAIT,
+            T_ENUM,
         ];
 
     }//end register()

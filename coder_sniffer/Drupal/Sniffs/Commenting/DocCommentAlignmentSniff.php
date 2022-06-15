@@ -52,7 +52,8 @@ class DocCommentAlignmentSniff implements Sniff
     {
         $tokens = $phpcsFile->getTokens();
 
-        // We are only interested in function/class/interface doc block comments.
+        // We are only interested in function/class/interface/trait/enum doc block
+        // comments.
         $ignore = Tokens::$emptyTokens;
         if ($phpcsFile->tokenizerType === 'JS') {
             $ignore[] = T_EQUAL;
@@ -64,6 +65,8 @@ class DocCommentAlignmentSniff implements Sniff
         $ignore    = [
             T_CLASS     => true,
             T_INTERFACE => true,
+            T_TRAIT     => true,
+            T_ENUM      => true,
             T_FUNCTION  => true,
             T_PUBLIC    => true,
             T_PRIVATE   => true,

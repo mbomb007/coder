@@ -56,6 +56,7 @@ class InlineVariableCommentSniff implements Sniff
             T_CLASS,
             T_INTERFACE,
             T_TRAIT,
+            T_ENUM,
             T_FUNCTION,
             T_CLOSURE,
             T_PUBLIC,
@@ -73,7 +74,7 @@ class InlineVariableCommentSniff implements Sniff
             T_VAR,
         ];
 
-        // If this is a function/class/interface doc block comment, skip it.
+        // If this is a function/class/interface/trait/enum doc block comment, skip it.
         $nextToken = $phpcsFile->findNext(Tokens::$emptyTokens, ($stackPtr + 1), null, true);
         if (in_array($tokens[$nextToken]['code'], $ignore, true) === true) {
             return;
